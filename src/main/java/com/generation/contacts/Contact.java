@@ -1,8 +1,6 @@
 package com.generation.contacts;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Contact {
     private String firstName;
@@ -46,138 +44,6 @@ public class Contact {
     public String toString() {
         return firstName + " " + lastName + ": " + phoneNumber;
     }
-
-    public static void listarContactos(HashSet<Contact> contactList) {
-        System.out.println("\n--- Lista de Contactos ---");
-        if (contactList.isEmpty()) {
-            System.out.println("No hay contactos registrados");
-        } else {
-            contactList.forEach(System.out::println);
-        }
-        System.out.println("--------------------------");
-    }
-
-    public static void existeContacto(HashSet<Contact> contactList, Scanner s) {
-        System.out.println("\n--- Verificar Contacto ---");
-        System.out.print("Ingrese nombre: ");
-        String firstName = s.nextLine();
-        System.out.print("Ingrese apellido: ");
-        String lastName = s.nextLine();
-
-        boolean exists = false;
-        for (Contact c : contactList) {
-            if (c.getFirstName().equalsIgnoreCase(firstName) &&
-                    c.getLastName().equalsIgnoreCase(lastName)) {
-                exists = true;
-                break;
-            }
-        }
-
-        if (exists) {
-            System.out.println("El contacto existe en la agenda.");
-        } else {
-            System.out.println("El contacto no existe en la agenda.");
-        }
-        System.out.println("--------------------------");
-    }
-
-    //Edna
-
-    //Pido el objeto de hash set y el scanner para que no se use varias veces
-    public static boolean deleteContact(HashSet<Contact> contactList, Scanner scanner) {
-        System.out.println("\n--- Eliminar Contacto ---");
-
-        // Solicitar datos del contacto a eliminar
-        System.out.print("Ingrese nombre: ");
-        String firstName = scanner.nextLine().trim();
-
-        System.out.print("Ingrese apellido: ");
-        String lastName = scanner.nextLine().trim();
-
-        // Validar campos vacíos
-        if (firstName.isEmpty() || lastName.isEmpty()) {
-            System.out.println("Error: Nombre y apellido son obligatorios");
-            System.out.println("--------------------------");
-            return false;
-        }
-
-        // Crear contacto temporal para búsqueda (sin número)
-        Contact contactToRemove = new Contact(firstName, lastName, "");
-
-        // Buscar y eliminar el contacto
-        boolean removed = contactList.removeIf(c ->
-                c.getFirstName().equalsIgnoreCase(firstName) &&
-                        c.getLastName().equalsIgnoreCase(lastName)
-        );
-
-        if (removed) {
-            System.out.println("Contacto " + firstName + " " + lastName + " eliminado correctamente.");
-        } else {
-            System.out.println("No se encontró el contacto " + firstName + " " + lastName);
-        }
-
-        System.out.println("--------------------------");
-        return removed;
-    }
-
-
-
-
-
-    public static boolean modPhone(HashSet<Contact> contactList, Scanner scanner) {
-        System.out.println("\n--- Modificar Teléfono ---");
-
-        // Solicitar datos del contacto
-        System.out.print("Ingrese nombre: ");
-        String firstName = scanner.nextLine().trim();
-
-        System.out.print("Ingrese apellido: ");
-        String lastName = scanner.nextLine().trim();
-
-        // Validar campos vacíos
-        if (firstName.isEmpty() || lastName.isEmpty()) {
-            System.out.println("Error: Nombre y apellido son obligatorios");
-            System.out.println("--------------------------");
-            return false;
-        }
-
-        // Buscar el contacto existente
-        Contact existingContact = null;
-        for (Contact c : contactList) {
-            if (c.getFirstName().equalsIgnoreCase(firstName) &&
-                    c.getLastName().equalsIgnoreCase(lastName)) {
-                existingContact = c;
-                break;
-            }
-        }
-
-        if (existingContact == null) {
-            System.out.println("Error: No se encontró el contacto " + firstName + " " + lastName);
-            System.out.println("--------------------------");
-            return false;
-        }
-
-        // Solicitar nuevo número
-        System.out.print("Ingrese nuevo número de teléfono: ");
-        String newPhoneNumber = scanner.nextLine().trim();
-
-        // Crear nuevo contacto con el número actualizado
-        Contact updatedContact = new Contact(firstName, lastName, newPhoneNumber);
-
-        // Reemplazar el contacto
-        contactList.remove(existingContact);
-        contactList.add(updatedContact);
-
-        System.out.println("Teléfono actualizado correctamente para " + firstName + " " + lastName);
-        System.out.println("Nuevo número: " + newPhoneNumber);
-        System.out.println("--------------------------");
-        return true;
-    }
-
-
-
-
-    // Jose
 
     public static boolean addContact(HashSet<Contact> contactList, Scanner scanner) {
         System.out.println("\n--- Agregar Nuevo Contacto ---");
@@ -229,8 +95,129 @@ public class Contact {
         return added;
     }
 
+    public static void listContacts(HashSet<Contact> contactList) {
+        System.out.println("\n--- Lista de Contactos ---");
+        if (contactList.isEmpty()) {
+            System.out.println("No hay contactos registrados");
+        } else {
 
+            TreeSet<Contact> sortedContacts = new TreeSet<>(Comparator.comparing(Contact::getFirstName).thenComparing(Contact::getLastName));
+            sortedContacts.addAll(contactList);
+            sortedContacts.forEach(System.out::println);
+        }
+        System.out.println("--------------------------");
+    }
 
+    public static void verifyContact(HashSet<Contact> contactList, Scanner s) {
+        System.out.println("\n--- Verificar Contacto ---");
+        // Se ingresa el nombre y apellido para buscar en el hashset con un ciclo
+        System.out.print("Ingrese nombre: ");
+        String firstName = s.nextLine();
+        System.out.print("Ingrese apellido: ");
+        String lastName = s.nextLine();
+        Contact tempC = null;
+        for (Contact c : contactList) {
+            // Se verifica la existencia del contacto ignorando mayúsculas y minúsculas, se guarda el contacto temporalmente
+            if (c.getFirstName().equalsIgnoreCase(firstName) && c.getLastName().equalsIgnoreCase(lastName)) {
+                tempC = c;
+                break;
+            }
+        }
+        // Se imprime un mensaje dependiendo de resultado
+        if (tempC == null) {
+            System.out.println("El contacto " + firstName + " " + lastName + " no existe");
+        }else{
+            System.out.println("El número de " + tempC.firstName + " " + tempC.lastName + " es " + tempC.phoneNumber);
+        }
+        System.out.println("--------------------------");
+    }
 
+    //Edna
 
+    //Pido el objeto de hash set y el scanner para que no se use varias veces
+    public static boolean deleteContact(HashSet<Contact> contactList, Scanner scanner) {
+        System.out.println("\n--- Eliminar Contacto ---");
+
+        // Solicitar datos del contacto a eliminar
+        System.out.print("Ingrese nombre: ");
+        String firstName = scanner.nextLine().trim();
+
+        System.out.print("Ingrese apellido: ");
+        String lastName = scanner.nextLine().trim();
+
+        // Validar campos vacíos
+        if (firstName.isEmpty() || lastName.isEmpty()) {
+            System.out.println("Error: Nombre y apellido son obligatorios");
+            System.out.println("--------------------------");
+            return false;
+        }
+
+        // Crear contacto temporal para búsqueda (sin número)
+        Contact contactToRemove = new Contact(firstName, lastName, "");
+
+        // Buscar y eliminar el contacto
+        boolean removed = contactList.removeIf(c ->
+                c.getFirstName().equalsIgnoreCase(firstName) &&
+                        c.getLastName().equalsIgnoreCase(lastName)
+        );
+
+        if (removed) {
+            System.out.println("Contacto " + firstName + " " + lastName + " eliminado correctamente.");
+        } else {
+            System.out.println("No se encontró el contacto " + firstName + " " + lastName);
+        }
+
+        System.out.println("--------------------------");
+        return removed;
+    }
+
+    public static boolean modifyPhone(HashSet<Contact> contactList, Scanner scanner) {
+        System.out.println("\n--- Modificar Teléfono ---");
+
+        // Solicitar datos del contacto
+        System.out.print("Ingrese nombre: ");
+        String firstName = scanner.nextLine().trim();
+
+        System.out.print("Ingrese apellido: ");
+        String lastName = scanner.nextLine().trim();
+
+        // Validar campos vacíos
+        if (firstName.isEmpty() || lastName.isEmpty()) {
+            System.out.println("Error: Nombre y apellido son obligatorios");
+            System.out.println("--------------------------");
+            return false;
+        }
+
+        // Buscar el contacto existente
+        Contact existingContact = null;
+        for (Contact c : contactList) {
+            if (c.getFirstName().equalsIgnoreCase(firstName) &&
+                    c.getLastName().equalsIgnoreCase(lastName)) {
+                existingContact = c;
+                break;
+            }
+        }
+
+        if (existingContact == null) {
+            System.out.println("Error: No se encontró el contacto " + firstName + " " + lastName);
+            System.out.println("--------------------------");
+            return false;
+        }
+
+        // Solicitar nuevo número
+        System.out.print("Ingrese nuevo número de teléfono: ");
+        String newPhoneNumber = scanner.nextLine().trim();
+
+        // Crear nuevo contacto con el número actualizado
+        Contact updatedContact = new Contact(firstName, lastName, newPhoneNumber);
+
+        // Reemplazar el contacto
+        contactList.remove(existingContact);
+        contactList.add(updatedContact);
+
+        System.out.println("Teléfono actualizado correctamente para " + firstName + " " + lastName);
+        System.out.println("Nuevo número: " + newPhoneNumber);
+        System.out.println("--------------------------");
+        return true;
+    }
 }
