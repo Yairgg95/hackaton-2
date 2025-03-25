@@ -227,4 +227,12 @@ public class Contact {
         System.out.println("--------------------------");
         return true;
     }
+
+    public static boolean agendaLlena(HashSet<Contact> contactList) {
+        return contactList.size() >= 10;
+    }
+
+    public static int espacioLibres(HashSet<Contact> contactList) {
+        return 10 - contactList.size();
+    }
 }
