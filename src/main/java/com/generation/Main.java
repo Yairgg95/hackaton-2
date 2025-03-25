@@ -1,13 +1,12 @@
 package com.generation;
-
+import com.generation.contacts.Contact;
 import java.util.HashSet;
 import java.util.Scanner;
 
-import com.generation.contacts.Contact;
-
-
 public class Main {
+
     public static void main(String[] args) {
+
         Scanner s = new Scanner(System.in);
         int option = 1;
         HashSet<Contact> contactList = new HashSet<>();
@@ -28,16 +27,17 @@ public class Main {
         System.out.println("7. Agenda llena");
         System.out.println("8. Espacios libres");
         System.out.println("0. Salir");
-        System.out.print("Opción: ");
 
         while (option != 0) {
 
+            System.out.print("Eligé tu siguinte opción: ");
             option = s.nextInt();
             s.nextLine();
 
             switch (option) {
                 case 1: {
-
+                    Contact.addContact(contactList, s);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 2: {
@@ -45,22 +45,29 @@ public class Main {
                     break;
                 }
                 case 3: {
-                    Contact.listarContactos(contactList);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 4: {
-                    Contact.existeContacto(contactList, s);
+
+                    Contact.verifyContact(contactList, s);
                     break;
                 }
                 case 5: {
 
+                    Contact.deleteContact(contactList,s);
                     break;
                 }
                 case 6: {
 
+                    Contact.changeTelephoneNumber(contactList, s);
                     break;
                 }
                 case 7: {
+
+                    break;
+                }
+                case 8: {
 
                     break;
                 }
