@@ -15,7 +15,6 @@ public class Main {
         contactList.add(new Contact("Juan", "Ro", "123-456-7890"));
         contactList.add(new Contact("Alberto", "R", "234-567-8901"));
         contactList.add(new Contact("Josefa", "R", "345-678-9012"));
-
         contactList.add(new Contact("Juan", "R", "123-456-7890"));
 
         System.out.println("\n--- Menú Agenda ---");
@@ -37,7 +36,8 @@ public class Main {
 
             switch (option) {
                 case 1: {
-
+                    Contact.addContact(contactList, s);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 2: {
@@ -54,10 +54,16 @@ public class Main {
                 }
                 case 5: {
 
+
+                    // 5. Eliminar contacto
+                    Contact.deleteContact(contactList, s);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 6: {
-
+                    // 6. Modificar teléfono
+                    Contact.modPhone(contactList, s);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 7: {
