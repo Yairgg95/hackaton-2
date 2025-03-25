@@ -27,43 +27,50 @@ public class Main {
         System.out.println("7. Agenda llena");
         System.out.println("8. Espacios libres");
         System.out.println("0. Salir");
-        System.out.print("Opción: ");
+
 
         while (option != 0) {
-
+            System.out.print("Eligé una opción: ");
             option = s.nextInt();
             s.nextLine();
 
             switch (option) {
                 case 1: {
+
+                    // 1. Agregar contacto
                     Contact.addContact(contactList, s);
-                    Contact.listarContactos(contactList);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 2: {
 
+                    // 2. Existe contacto
                     break;
                 }
                 case 3: {
-                    Contact.listarContactos(contactList);
+
+                    // 3. Listar contactos
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 4: {
-                    Contact.existeContacto(contactList, s);
+
+
+                    Contact.verifyContact(contactList, s);
                     break;
                 }
                 case 5: {
 
-
                     // 5. Eliminar contacto
                     Contact.deleteContact(contactList, s);
-                    Contact.listarContactos(contactList);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 6: {
+
                     // 6. Modificar teléfono
-                    Contact.modPhone(contactList, s);
-                    Contact.listarContactos(contactList);
+                    Contact.modifyPhone(contactList, s);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 7: {
@@ -71,6 +78,7 @@ public class Main {
                     break;
                 }
                 case 0: {
+
                     System.out.println("Saliendo del programa...");
                     break;
                 }
