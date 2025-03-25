@@ -36,6 +36,7 @@ public class Main {
 
             switch (option) {
                 case 1: {
+
                     Contact.addContact(contactList, s);
                     Contact.listContacts(contactList);
                     break;
@@ -55,12 +56,16 @@ public class Main {
                 }
                 case 5: {
 
-                    Contact.deleteContact(contactList,s);
+                    // 5. Eliminar contacto
+                    Contact.deleteContact(contactList, s);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 6: {
 
-                    Contact.changeTelephoneNumber(contactList, s);
+                    // 6. Modificar teléfono
+                    Contact.modifyPhone(contactList, s);
+                    Contact.listContacts(contactList);
                     break;
                 }
                 case 7: {

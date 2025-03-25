@@ -108,27 +108,28 @@ public class Contact {
         System.out.println("--------------------------");
     }
 
-    public static Contact verifyContact(HashSet<Contact> contactList, Scanner s) {
+    public static void verifyContact(HashSet<Contact> contactList, Scanner s) {
         System.out.println("\n--- Verificar Contacto ---");
+        // Se ingresa el nombre y apellido para buscar en el hashset con un ciclo
         System.out.print("Ingrese nombre: ");
         String firstName = s.nextLine();
         System.out.print("Ingrese apellido: ");
         String lastName = s.nextLine();
         Contact tempC = null;
         for (Contact c : contactList) {
+            // Se verifica la existencia del contacto ignorando mayúsculas y minúsculas, se guarda el contacto temporalmente
             if (c.getFirstName().equalsIgnoreCase(firstName) && c.getLastName().equalsIgnoreCase(lastName)) {
-
-                System.out.println("El número de " + firstName + " " + lastName + " es " + c.phoneNumber);
                 tempC = c;
                 break;
             }
         }
+        // Se imprime un mensaje dependiendo de resultado
         if (tempC == null) {
             System.out.println("El contacto " + firstName + " " + lastName + " no existe");
+        }else{
+            System.out.println("El número de " + tempC.firstName + " " + tempC.lastName + " es " + tempC.phoneNumber);
         }
-
         System.out.println("--------------------------");
-        return tempC;
     }
 
     // metodo 5 eliminar contacto
@@ -153,18 +154,53 @@ public class Contact {
     }
 
     // metodo 6 modificar telefono
-    public static void changeTelephoneNumber(HashSet<Contact> contactList, Scanner s) {
-        Contact tempC = verifyContact(contactList, s);
+    public static boolean modifyPhone(HashSet<Contact> contactList, Scanner scanner) {
+        System.out.println("\n--- Modificar Teléfono ---");
 
-        if (tempC != null) {
-            System.out.print("Ingrese nuevo teléfono: ");
-            String nuevoTelefono = s.nextLine();
-            Contact nuevoContacto = new Contact(tempC.firstName, tempC.lastName, nuevoTelefono);
-            contactList.remove(tempC);
-            contactList.add(nuevoContacto);
-            System.out.println("Teléfono actualizado correctamente para " + nuevoContacto.firstName + " "
-                    + nuevoContacto.lastName);
+        // Solicitar datos del contacto
+        System.out.print("Ingrese nombre: ");
+        String firstName = scanner.nextLine().trim();
+
+        System.out.print("Ingrese apellido: ");
+        String lastName = scanner.nextLine().trim();
+
+        // Validar campos vacíos
+        if (firstName.isEmpty() || lastName.isEmpty()) {
+            System.out.println("Error: Nombre y apellido son obligatorios");
+            System.out.println("--------------------------");
+            return false;
         }
+
+        // Buscar el contacto existente
+        Contact existingContact = null;
+        for (Contact c : contactList) {
+            if (c.getFirstName().equalsIgnoreCase(firstName) &&
+                    c.getLastName().equalsIgnoreCase(lastName)) {
+                existingContact = c;
+                break;
+            }
+        }
+
+        if (existingContact == null) {
+            System.out.println("Error: No se encontró el contacto " + firstName + " " + lastName);
+            System.out.println("--------------------------");
+            return false;
+        }
+
+        // Solicitar nuevo número
+        System.out.print("Ingrese nuevo número de teléfono: ");
+        String newPhoneNumber = scanner.nextLine().trim();
+
+        // Crear nuevo contacto con el número actualizado
+        Contact updatedContact = new Contact(firstName, lastName, newPhoneNumber);
+
+        // Reemplazar el contacto
+        contactList.remove(existingContact);
+        contactList.add(updatedContact);
+
+        System.out.println("Teléfono actualizado correctamente para " + firstName + " " + lastName);
+        System.out.println("Nuevo número: " + newPhoneNumber);
         System.out.println("--------------------------");
+        return true;
     }
 }
