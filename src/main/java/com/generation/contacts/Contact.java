@@ -58,6 +58,13 @@ public class Contact {
         System.out.print("Ingrese número de teléfono: ");
         String phoneNumber = scanner.nextLine().trim();
 
+        //No sobrepases la agenda limite
+        if (contactList.size() >= 10) {
+            System.out.println("Error: La agenda está llena (límite 10 contactos)");
+            System.out.println("--------------------------");
+            return false;
+        }
+
         // Validar campos vacíos
         if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty()) {
             System.out.println("Error: Todos los campos son obligatorios");
