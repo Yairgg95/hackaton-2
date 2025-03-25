@@ -1,12 +1,13 @@
 package com.generation;
-import com.generation.contacts.Contact;
+
 import java.util.HashSet;
 import java.util.Scanner;
 
+import com.generation.contacts.Contact;
+
+
 public class Main {
-
     public static void main(String[] args) {
-
         Scanner s = new Scanner(System.in);
         int option = 1;
         HashSet<Contact> contactList = new HashSet<>();
@@ -14,7 +15,6 @@ public class Main {
         contactList.add(new Contact("Juan", "Ro", "123-456-7890"));
         contactList.add(new Contact("Alberto", "R", "234-567-8901"));
         contactList.add(new Contact("Josefa", "R", "345-678-9012"));
-
         contactList.add(new Contact("Juan", "R", "123-456-7890"));
 
         System.out.println("\n--- Menú Agenda ---");
@@ -27,18 +27,17 @@ public class Main {
         System.out.println("7. Agenda llena");
         System.out.println("8. Espacios libres");
         System.out.println("0. Salir");
+        System.out.print("Opción: ");
 
         while (option != 0) {
 
-            System.out.print("Eligé tu siguinte opción: ");
             option = s.nextInt();
             s.nextLine();
 
             switch (option) {
                 case 1: {
-
                     Contact.addContact(contactList, s);
-                    Contact.listContacts(contactList);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 2: {
@@ -46,33 +45,28 @@ public class Main {
                     break;
                 }
                 case 3: {
-                    Contact.listContacts(contactList);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 4: {
-
-                    Contact.verifyContact(contactList, s);
+                    Contact.existeContacto(contactList, s);
                     break;
                 }
                 case 5: {
 
+
                     // 5. Eliminar contacto
                     Contact.deleteContact(contactList, s);
-                    Contact.listContacts(contactList);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 6: {
-
                     // 6. Modificar teléfono
-                    Contact.modifyPhone(contactList, s);
-                    Contact.listContacts(contactList);
+                    Contact.modPhone(contactList, s);
+                    Contact.listarContactos(contactList);
                     break;
                 }
                 case 7: {
-
-                    break;
-                }
-                case 8: {
 
                     break;
                 }
