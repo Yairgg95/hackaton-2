@@ -21,8 +21,8 @@ public class Main {
             System.out.println("5. Eliminar contacto");
             System.out.println("6. Modificar teléfono");
             System.out.println("7. Agenda llena / Espacios libres");
+            System.out.println("7. Mostrar el menú");
             System.out.println("0. Salir");
-
             System.out.print("Eligé una opción: ");
             option = s.nextInt();
             s.nextLine();
@@ -63,7 +63,7 @@ public class Main {
                     String firstName = s.nextLine().trim();
                     System.out.print("Apellido: ");
                     String lastName = s.nextLine().trim();
-                    addressbook.searchContact(firstName,lastName);
+                    addressbook.searchContact(firstName, lastName);
                     break;
                 }
                 case 5: {
@@ -72,7 +72,7 @@ public class Main {
                     String firstName = s.nextLine().trim();
                     System.out.print("Apellido: ");
                     String lastName = s.nextLine().trim();
-                    Contact contactToDelete = new Contact(firstName,lastName, "");
+                    Contact contactToDelete = new Contact(firstName, lastName, "");
                     addressbook.deleteContact(contactToDelete);
                     addressbook.listContacts();
                     break;
@@ -85,17 +85,30 @@ public class Main {
                     String lastName = s.nextLine().trim();
                     System.out.print("Nuevo Teléfono: ");
                     String newPhoneNumber = s.nextLine().trim();
-                    addressbook.updatePhoneNumber(firstName,lastName,newPhoneNumber);
+                    addressbook.updatePhoneNumber(firstName, lastName, newPhoneNumber);
                     addressbook.listContacts();
                     break;
                 }
                 case 7: {
                     // 7. Verificar si la agenda está llena o los espacios libres
+
                     if (addressbook.isFull()) {
                         System.out.println("La agenda está llena.");
                     } else {
                         System.out.println("Espacios libres: " + addressbook.availableSlots());
                     }
+                    break;
+                }
+                case 8: {
+                    System.out.println("\n--- Menú Agenda ---");
+                    System.out.println("1. Añadir contacto");
+                    System.out.println("2. Verificar existencia");
+                    System.out.println("3. Listar contactos");
+                    System.out.println("4. Buscar contacto");
+                    System.out.println("5. Eliminar contacto");
+                    System.out.println("6. Modificar teléfono");
+                    System.out.println("7. Agenda llena / Espacios libres");
+                    System.out.println("0. Salir");
                     break;
                 }
                 case 0: {

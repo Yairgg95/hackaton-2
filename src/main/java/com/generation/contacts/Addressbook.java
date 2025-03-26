@@ -2,11 +2,10 @@ package com.generation.contacts;
 
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Addressbook {
-    private  HashSet<Contact> contactList = new HashSet<>();
+    private HashSet<Contact> contactList = new HashSet<>();
 
     public boolean addContact(Contact contact) {
 
@@ -51,7 +50,9 @@ public class Addressbook {
         return added;
     }
 
+
     public void listContacts() {
+
         System.out.println("\n--- Lista de Contactos ---");
         if (contactList.isEmpty()) {
             System.out.println("No hay contactos registrados");
@@ -80,13 +81,14 @@ public class Addressbook {
             System.out.println("El contacto " + firstName + " " + lastName + " no existe");
             System.out.println("--------------------------");
             return null;
-        }else{
+        } else {
             System.out.println("El número de " + tempC.getFirstName() + " " + tempC.getLastName() + " es " + tempC.getPhoneNumber());
             System.out.println("--------------------------");
             return tempC.getPhoneNumber();
         }
 
     }
+    //
 
     //Edna
 
@@ -150,7 +152,7 @@ public class Addressbook {
     }
 
     public boolean isFull() {
-        if(contactList.size() >= 10) {
+        if (contactList.size() >= 10) {
             System.out.println("La agenda esta llena");
             return true;
         }
@@ -158,8 +160,8 @@ public class Addressbook {
     }
 
     public boolean contactExists(Contact contact) {
-        for(Contact c : contactList){
-            if(c.getFirstName().equalsIgnoreCase(contact.getFirstName()) &&
+        for (Contact c : contactList) {
+            if (c.getFirstName().equalsIgnoreCase(contact.getFirstName()) &&
                     c.getLastName().equalsIgnoreCase(contact.getLastName())) {
                 System.out.println("El contacto " + contact.toString() + " ya existe en la agenda");
                 return true;
@@ -168,4 +170,5 @@ public class Addressbook {
         System.out.println("El contacto " + contact.toString() + "  no existe en la agenda");
         return false;
     }
+
 }
