@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class AdressbookTest {
+public class AddressbookTest {
 
 
     private Addressbook addressbook;
@@ -42,7 +42,7 @@ public class AdressbookTest {
         Contact contact = new Contact("Julio", "Ramirez", "1234567890");
         addressbook.addContact(contact);
 
-        assertEquals(contact.getPhoneNumber(), addressbook.contactExists(contact));
+        assertTrue(addressbook.contactExists(contact));
     }
 
     @Test
@@ -85,6 +85,13 @@ public class AdressbookTest {
         addressbook.addContact(new Contact("Julio", "Ramirez", "1234567890"));
         addressbook.addContact(new Contact("Fernanda", "Perez", "0987654321"));
         addressbook.addContact(new Contact("Alicia", "Garcia", "1112223333"));
+        addressbook.addContact(new Contact("Julio", "Gonzales", "1234567890"));
+        addressbook.addContact(new Contact("Fernanda", "Elizalde", "0987654321"));
+        addressbook.addContact(new Contact("Alicia", "Mares", "1112223333"));
+        addressbook.addContact(new Contact("Julio", "Raya", "1234567890"));
+        addressbook.addContact(new Contact("Fernanda", "Alvarez", "0987654321"));
+        addressbook.addContact(new Contact("Alicia", "Jimenez", "1112223333"));
+        addressbook.addContact(new Contact("Alicia", "Blancas", "1112223333"));
 
         assertTrue(addressbook.isFull());
     }
@@ -92,7 +99,7 @@ public class AdressbookTest {
     @Test
     void testAvailableSlots() {
         addressbook.addContact(new Contact("Julio", "Ramirez", "1234567890"));
-        assertEquals(2, addressbook.availableSlots());
+        assertEquals(9, addressbook.availableSlots());
     }
 
 
