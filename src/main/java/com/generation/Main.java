@@ -9,16 +9,18 @@ public class Main {
         Scanner s = new Scanner(System.in);
         int option = 1;
 
+        System.out.println("\n--- Menú Agenda ---");
+        System.out.println("1. Añadir contacto");
+        System.out.println("2. Verificar existencia");
+        System.out.println("3. Listar contactos");
+        System.out.println("4. Buscar contacto");
+        System.out.println("5. Eliminar contacto");
+        System.out.println("6. Modificar teléfono");
+        System.out.println("7. Agenda llena / Espacios libres");
+        System.out.println("7. Mostrar el menú");
+        System.out.println("0. Salir");
+
         while (option != 0) {
-            System.out.println("\n--- Menú Agenda ---");
-            System.out.println("1. Añadir contacto");
-            System.out.println("2. Verificar existencia");
-            System.out.println("3. Listar contactos");
-            System.out.println("4. Buscar contacto");
-            System.out.println("5. Eliminar contacto");
-            System.out.println("6. Modificar teléfono");
-            System.out.println("7. Agenda llena / Espacios libres");
-            System.out.println("0. Salir");
 
             System.out.print("Eligé una opción: ");
             option = s.nextInt();
@@ -33,6 +35,7 @@ public class Main {
                 }
                 case 2: {
                     // 2. Existe contacto
+                    Addressbook.isContactExists(s);
                     break;
                 }
                 case 3: {
@@ -59,11 +62,24 @@ public class Main {
                 }
                 case 7: {
                     // 7. Verificar si la agenda está llena o los espacios libres
-                    if (Contact.agendaLlena(contactList)) {
+                    if (Addressbook.availableSpace()) {
                         System.out.println("La agenda está llena.");
                     } else {
-                        System.out.println("Espacios libres: " + Contact.espacioLibres(contactList));
+                        System.out.println("Espacios disponibles: " + Addressbook.checkAddressbookSize());
                     }
+                    break;
+                }
+                case 8:{
+                    System.out.println("\n--- Menú Agenda ---");
+                    System.out.println("1. Añadir contacto");
+                    System.out.println("2. Verificar existencia");
+                    System.out.println("3. Listar contactos");
+                    System.out.println("4. Buscar contacto");
+                    System.out.println("5. Eliminar contacto");
+                    System.out.println("6. Modificar teléfono");
+                    System.out.println("7. Agenda llena / Espacios libres");
+                    System.out.println("7. Mostrar el menú");
+                    System.out.println("0. Salir");
                     break;
                 }
                 case 0: {

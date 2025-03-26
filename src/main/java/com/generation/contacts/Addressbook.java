@@ -60,6 +60,31 @@ public class Addressbook {
         System.out.println("--------------------------");
     }
 
+    // Joaquín
+    public static void isContactExists(Scanner scanner) {
+        //Se ingresa el nombre y apellido del contacto que se requier buscar
+        System.out.print("Ingrese nombre: ");
+        String firstName = scanner.nextLine().trim();
+
+        System.out.print("Ingrese apellido: ");
+        String lastName = scanner.nextLine().trim();
+
+        // Validación de que las variable no estén vacías
+        if (firstName.isEmpty() || lastName.isEmpty()) {
+            System.out.println("Error: Nombre y apellido son obligatorios");
+            return;
+        }
+
+        // Iteración de la lista en busqueda del contacto con valores iguales
+        for (Contact c : contactList) {
+            if (c.getFirstName().equals(firstName) && c.getLastName().equals(lastName)) {
+                System.out.println("El contacto " + firstName + " " + lastName + " existe en la agenda");
+                return;
+            }
+        }
+        System.out.println("El contacto " + firstName + " " + lastName + " no existe en la agenda");
+    }
+
     public static void listContacts() {
         System.out.println("\n--- Lista de Contactos ---");
         if (contactList.isEmpty()) {
@@ -96,6 +121,7 @@ public class Addressbook {
         }
         System.out.println("--------------------------");
     }
+    //
 
     //Edna
 
@@ -182,4 +208,13 @@ public class Addressbook {
         System.out.println("Nuevo número: " + newPhoneNumber);
         System.out.println("--------------------------");
     }
+
+    public static boolean availableSpace() {
+        return contactList.size() >= 10;
+    }
+
+    public static int checkAddressbookSize() {
+        return 10 - contactList.size();
+    }
+
 }
