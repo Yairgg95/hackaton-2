@@ -1,20 +1,13 @@
 package com.generation;
 
-import java.util.HashSet;
 import java.util.Scanner;
+import com.generation.contacts.Addressbook;
 
-import com.generation.contacts.Contact;
 
 public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         int option = 1;
-        HashSet<Contact> contactList = new HashSet<>();
-
-        contactList.add(new Contact("Juan", "Ro", "123-456-7890"));
-        contactList.add(new Contact("Alberto", "R", "234-567-8901"));
-        contactList.add(new Contact("Josefa", "R", "345-678-9012"));
-        contactList.add(new Contact("Juan", "R", "123-456-7890"));
 
         while (option != 0) {
             System.out.println("\n--- Menú Agenda ---");
@@ -34,7 +27,8 @@ public class Main {
             switch (option) {
                 case 1: {
                     // 1. Agregar contacto
-                    Contact.addContact(contactList, s);
+                    Addressbook.addContact(s);
+                    Addressbook.listContacts();
                     break;
                 }
                 case 2: {
@@ -43,22 +37,24 @@ public class Main {
                 }
                 case 3: {
                     // 3. Listar contactos
-                    Contact.listContacts(contactList);
+                    Addressbook.listContacts();
                     break;
                 }
                 case 4: {
-                    // 4. Buscar contacto
-                    Contact.verifyContact(contactList, s);
+                    //4. Verificar contacto
+                    Addressbook.verifyContact(s);
                     break;
                 }
                 case 5: {
                     // 5. Eliminar contacto
-                    Contact.deleteContact(contactList, s);
+                    Addressbook.deleteContact(s);
+                    Addressbook.listContacts();
                     break;
                 }
                 case 6: {
                     // 6. Modificar teléfono
-                    Contact.modifyPhone(contactList, s);
+                    Addressbook.modifyPhone(s);
+                    Addressbook.listContacts();
                     break;
                 }
                 case 7: {
